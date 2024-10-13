@@ -67,4 +67,31 @@ VALUES
 (4, 3, '2023-09-04'),
 (5, 1, '2023-09-05');
 
+-- Query to retrieve the full names of students enrolled in 'Physics 101'
+SELECT first_name || ", " || last_name AS full_name
+FROM students
+JOIN enrollments ON students.id = enrollments.student_id
+JOIN courses ON enrollments.course_id = courses.id
+WHERE courses.course_name = 'Physics 101';
+
+-- Query to retrieve all courses along with the professor's name who teaches each course
+SELECT courses.course_name, professors.first_name || ' ' || professors.last_name AS professor_name
+FROM courses
+JOIN professors ON courses.professor_id = professors.id;
+
+-- Query to retrieve all courses that have students enrolled in them
+SELECT DISTINCT courses.course_name
+FROM courses
+JOIN enrollments ON courses.id = enrollments.course_id;
+
+--Query to update student's email
+UPDATE students
+SET email = 'mark.stone@outlook.com'
+WHERE id = 1;
+
+--Query to remove a student from one of the courses
+DELETE FROM enrollments
+WHERE student_id = 1 AND course_id = 1;
+
+
 
